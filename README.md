@@ -112,8 +112,7 @@ linux-firewall-hardening
 ├── README.md
 ├── firewall-policy-check.sh
 └── screenshots/
-    ├── firewall-status.png
-    ├── baseline-services.png
+    ├── firewall-status&baseline-services.png
     ├── ssh-success.png
     ├── ssh-failure.png
     ├── troubleshooting.png
