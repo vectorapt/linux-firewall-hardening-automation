@@ -1,98 +1,109 @@
 # Linux Firewall Configuration & Security Hardening (firewalld)
 
-## 📌 Overview
+## Overview
 
-This project demonstrates host-based firewall configuration and security hardening using firewalld on a RHEL-based virtual machine. The system is treated as a minimal production-like server where only required services are exposed following least-privilege principles.
+This project demonstrates host-based firewall configuration and security hardening using **firewalld** on a RHEL 9 virtual machine.
 
-The project also includes troubleshooting exercises and lightweight Bash automation for firewall validation.
-
----
-
-## 🎯 Objectives
-
-- Configure firewall rules using firewalld
-- Apply least-privilege security principles
-- Understand runtime vs permanent rules
-- Simulate firewall-related failures
-- Perform structured troubleshooting
-- Automate firewall checks using Bash
+The system is configured following **least-privilege principles**, exposing only required services.  
+The project also includes failure simulation, troubleshooting, and a small Bash validation script.
 
 ---
 
-## 🖥 Environment
+## Objectives
 
-- Platform: VMware
-- Operating System: RHEL 9
-- Firewall Manager: firewalld
-- Test Services: SSH, HTTP
-
----
-
-## 🔥 Firewall Hardening Strategy
-
-The firewall configuration follows a least-privilege model:
-
-- Allow only required services
-- Block all other inbound traffic by default
-
-Allowed Services:
-
-- SSH (administrative access)
-- HTTP (simulated application traffic)
+• Configure firewall rules using firewalld  
+• Apply least-privilege security principles  
+• Simulate firewall misconfiguration scenarios  
+• Perform structured troubleshooting  
+• Validate firewall configuration with Bash automation
 
 ---
 
-## ⚙ Firewall Configuration
+## Environment
 
-Firewall configuration begins by identifying the active firewall zones and the default zone associated with the network interface. Required services are added using permanent rules to ensure persistence across reboots, followed by a firewall reload to apply changes.
+Platform: VMware  
+Operating System: RHEL 9  
+Firewall Manager: firewalld  
 
-Firewall state verification confirms that only intended services are exposed.
+Testing Setup:
 
----
-
-## ❌ Failure Simulation
-
-SSH access is intentionally disrupted by removing the SSH firewall rule. This simulates a common administrative misconfiguration scenario where connectivity issues arise despite the service remaining operational.
-
-Observed behavior:
-
-- SSH connection attempts fail
-- SSH daemon remains active
+Machine1 – Firewall Server (RHEL 9)  
+Machine2 – External Client used for SSH validation
 
 ---
 
-## 🛠 Troubleshooting Methodology
+## Firewall Hardening Strategy
 
-Connectivity issues are diagnosed using a structured approach:
+The firewall configuration follows a **least-privilege model**.
 
-- Inspect firewall configuration and allowed services
-- Validate service state
-- Verify listening ports
-- Perform external validation
+Only the following services are exposed:
 
----
+SSH  
+HTTP  
 
-## ✅ Resolution
-
-SSH connectivity is restored by correcting firewall rules and reloading the firewall configuration.
+Default services such as **cockpit** and **dhcpv6-client** were removed to reduce unnecessary exposure and enforce a minimal access model.
 
 ---
 
-## 🔁 Persistence Testing
+## Firewall Validation
 
-Firewall rules are verified after system reboot to ensure configuration persistence.
+After applying the hardened configuration, external connectivity was tested.
 
----
-
-## 🤖 Bash Automation
-
-A lightweight Bash script validates firewall configuration, detects missing services, and logs command outcomes.
+SSH access from an external machine confirmed that the firewall allowed administrative access while restricting other services.
 
 ---
 
-## ✅ Skills Demonstrated
+## Failure Simulation
 
-- firewalld configuration and management
-- Firewall troubleshooting workflow
-- Service versus network diagnostics
-- Bash scripting for validation
+To simulate a common misconfiguration scenario, the SSH firewall rule was intentionally removed.
+
+An external SSH attempt was performed again, which resulted in a **connection failure**.
+
+This demonstrates how firewall rules directly affect network accessibility.
+
+---
+
+## Troubleshooting
+
+A structured troubleshooting approach was used to identify the cause of the failure:
+
+• Verify SSH daemon status  
+• Confirm SSH port is listening  
+• Inspect firewall service rules  
+
+The investigation confirmed that SSH traffic was blocked by the firewall configuration.
+
+---
+
+## Resolution
+
+The SSH firewall rule was restored and the firewall configuration reloaded.
+
+External SSH access was tested again and connectivity was successfully restored.
+
+---
+
+## Bash Automation
+
+A lightweight Bash script was created to quickly validate firewall configuration.
+
+The script checks:
+
+• firewalld service status  
+• currently allowed firewall services  
+
+---
+
+## Skills Demonstrated
+
+• firewalld configuration and management  
+• Linux firewall hardening  
+• least-privilege security implementation  
+• structured troubleshooting methodology  
+• network service validation  
+• Bash scripting for system checks
+
+---
+
+## Project Structure
+
