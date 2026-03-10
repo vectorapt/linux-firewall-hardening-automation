@@ -107,3 +107,17 @@ The script checks:
 
 ## Project Structure
 
+```
+linux-firewall-hardening
+├── README.md
+├── firewall-policy-check.sh
+└── screenshots/
+    ├── firewall-status.png
+    ├── baseline-services.png
+    ├── ssh-success.png
+    ├── ssh-failure.png
+    ├── troubleshooting.png
+    ├── ssh-restored.png
+    └── script-output.png
+```
+
